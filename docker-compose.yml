@@ -1,0 +1,22 @@
+version: '1.0'
+
+services:
+  db:
+    image: mysql
+    restart: always
+    container_name: mcsfinalmysql
+    environment:
+      MYSQL_ROOT_PASSWORD: mcsf1n4l
+      MYSQL_DATABASE: mcsfinal
+      MYSQL_USER: mcsuser
+      MYSQL_PASSWORD: mcspass
+    ports:
+      - '3307:3306'
+
+  redis:
+    image: redis
+    hostname: redis
+    container_name: mcsfinalredis
+    ports:
+      - "6379:6379"
+
