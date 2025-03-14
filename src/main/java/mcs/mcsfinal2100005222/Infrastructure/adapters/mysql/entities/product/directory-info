@@ -1,0 +1,5 @@
+Bu düzlemde abstract bir product sınıfı çevresinde şekillenen yapı tercih etmek istedim fakat deneyimli
+uzmanlardan aldığım görüşlere göre eticaret sitelerinde kategorilerin esnekliğinden ve sürekli değişebilir
+olmasından kaynaklı olarak daha esnek bir yapı tercih ettim. Bunun için entity-value-attribute db design
+pattern kullanmak istedim. Veritabanının tamamı bu design pattern çevresinde şekillenmese de kategorileri bu pattern
+ile yönettim.
