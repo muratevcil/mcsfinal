@@ -1,37 +1,32 @@
-package mcs.mcsfinal2100005222.Application.endpoints;
+package mcs.mcsfinal2100005222.Application.endpoints.product;
 
-import jakarta.websocket.server.PathParam;
-import lombok.AllArgsConstructor;
+
+import mcs.mcsfinal2100005222.Domain.dto.product.CreateNewProductRequest;
 import mcs.mcsfinal2100005222.Domain.entities.GenericResponse;
 import mcs.mcsfinal2100005222.Domain.entities.product.ProductEntity;
 import mcs.mcsfinal2100005222.Domain.ports.ProductServicePort;
-import mcs.mcsfinal2100005222.Infrastructure.adapters.mysql.repositories.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/test")
-@AllArgsConstructor
-public class Test {
-
-    @Autowired
-    private ProductRepository productRepository;
+@RequestMapping("/product")
+public class ProductController {
 
     @Autowired
     private ProductServicePort productManager;
-
-    @GetMapping("/getProductByUUID/{uuid}")
-    public String getProductByUUID(@PathVariable String uuid){
-        return null;
-    }
 
     @GetMapping( "/getAllProducts")
     public GenericResponse<List<ProductEntity>> getProductsByCategoryId(){
         System.out.println("çalış");
         return productManager.getAllProducts();
     }
+
+    @PostMapping("/addNewProduct")
+    public GenericResponse<ProductEntity> addNewProduct(@RequestBody CreateNewProductRequest createNewProductRequest){
+        return productManager.addNewProduct(createNewProductRequest);
+    }
+
 
 }

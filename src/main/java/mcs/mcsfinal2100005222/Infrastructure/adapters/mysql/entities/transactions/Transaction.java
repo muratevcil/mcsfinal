@@ -2,6 +2,10 @@ package mcs.mcsfinal2100005222.Infrastructure.adapters.mysql.entities.transactio
 
 
 import jakarta.persistence.*;
+import mcs.mcsfinal2100005222.Infrastructure.adapters.mysql.entities.product.Product;
+import mcs.mcsfinal2100005222.Infrastructure.adapters.mysql.entities.wallet.Wallet;
+
+import java.util.List;
 
 @Entity
 @Table(name="transactions")
@@ -9,14 +13,11 @@ public class Transaction {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    @Column(name="uuid")
-    private String uuid;
+    @Column(name="transaction_uuid")
+    private String transactionUuid;
 
-    @Column(name="product_uuid")
-    private String productUuid;
-
-    @Column(name="user_uuid")
-    private String userUuid;
+    @ManyToMany(mappedBy = "transactions")
+    private List<Product> productList;
 
     @Column(name="quantity")
     private double quantity;
@@ -29,5 +30,13 @@ public class Transaction {
 
     @Column(name="tax_id")
     private int taxId;
+
+    @ManyToOne
+    @JoinColumn(name="wallet_uuid",referencedColumnName = "walletUuid")
+    private Wallet wallet;
+
+    @ManyToOne
+    @JoinColumn(name="transaction_location_uuid")
+    private TransactionLocation transactionLocation;
 
 }

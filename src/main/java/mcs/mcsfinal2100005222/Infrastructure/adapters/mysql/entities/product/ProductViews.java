@@ -1,6 +1,7 @@
 package mcs.mcsfinal2100005222.Infrastructure.adapters.mysql.entities.product;
 
 import jakarta.persistence.*;
+import mcs.mcsfinal2100005222.Infrastructure.adapters.mysql.entities.user.User;
 import org.springframework.data.annotation.CreatedDate;
 
 import java.util.Date;
@@ -18,8 +19,9 @@ public class ProductViews {
     @JoinColumn(name="product_uuid")
     private Product product;
 
-    @Column(name="user_id")
-    private int user_id;
+    @ManyToOne
+    @JoinColumn(name="user_uuid")
+    private User user;
 
     @CreatedDate
     private Date viewDate;

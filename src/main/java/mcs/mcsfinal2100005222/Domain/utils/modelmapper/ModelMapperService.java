@@ -1,4 +1,4 @@
-package mcs.mcsfinal2100005222.Infrastructure.adapters.utils.modelmapper;
+package mcs.mcsfinal2100005222.Domain.utils.modelmapper;
 
 import org.modelmapper.ModelMapper;
 

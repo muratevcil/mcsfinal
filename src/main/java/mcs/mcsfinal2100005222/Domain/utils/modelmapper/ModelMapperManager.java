@@ -1,10 +1,7 @@
-package mcs.mcsfinal2100005222.Infrastructure.adapters.utils.modelmapper;
+package mcs.mcsfinal2100005222.Domain.utils.modelmapper;
 
 
-import mcs.mcsfinal2100005222.Domain.entities.product.ProductEntity;
-import mcs.mcsfinal2100005222.Infrastructure.adapters.mysql.entities.product.Product;
 import org.modelmapper.ModelMapper;
-import org.modelmapper.PropertyMap;
 import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,13 +24,6 @@ public class ModelMapperManager implements ModelMapperService {
 
 		.setAmbiguityIgnored(true)  // Ambiguity = Belirsizlik. Mapping objesinde aynı isimlerdeki verilerin belirsizlik yaratması konusunda hata vermesini engellemek için Ignored i true yapıyoruz.
 		.setMatchingStrategy(MatchingStrategies.LOOSE); // Veritabanı nesnesindeki bütün columnları almamıza gerek olmadığını belirtiyoruz.
-
-		/*this.modelMapper.addMappings(new PropertyMap<Product, ProductEntity>() {
-			protected void configure() {
-				map(source.getCategories(), destination.getProductCategory());
-				map(source.get(), destination.getProductEAVList());
-			}
-		});*/
 
 		return this.modelMapper;
 	}

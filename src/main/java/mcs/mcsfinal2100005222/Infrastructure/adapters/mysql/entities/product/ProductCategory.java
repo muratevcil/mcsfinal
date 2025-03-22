@@ -1,7 +1,10 @@
 package mcs.mcsfinal2100005222.Infrastructure.adapters.mysql.entities.product;
 
 
+import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
+import mcs.mcsfinal2100005222.Infrastructure.adapters.mysql.entities.cart.CartCategoryDiscount;
+
 
 import java.util.List;
 
@@ -11,6 +14,7 @@ public class ProductCategory {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="category_id")
     private int categoryId;
     @ManyToMany
     @JoinTable(
@@ -23,6 +27,9 @@ public class ProductCategory {
     private String categoryName;
     @Column(name="category_description")
     private String categoryDescription;
+
+    @OneToMany(mappedBy = "cartDiscountCategories")
+    private List<CartCategoryDiscount> cartCategoryDiscounts;
 
     public int getCategoryId() {
         return categoryId;
@@ -54,5 +61,13 @@ public class ProductCategory {
 
     public void setCategoryDescription(String categoryDescription) {
         this.categoryDescription = categoryDescription;
+    }
+
+    public List<CartCategoryDiscount> getCartCategoryDiscounts() {
+        return cartCategoryDiscounts;
+    }
+
+    public void setCartCategoryDiscounts(List<CartCategoryDiscount> cartCategoryDiscounts) {
+        this.cartCategoryDiscounts = cartCategoryDiscounts;
     }
 }
