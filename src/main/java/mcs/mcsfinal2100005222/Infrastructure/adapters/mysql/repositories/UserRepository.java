@@ -1,6 +1,7 @@
 package mcs.mcsfinal2100005222.Infrastructure.adapters.mysql.repositories;
 
 
+import mcs.mcsfinal2100005222.Infrastructure.adapters.mysql.entities.cart.Cart;
 import mcs.mcsfinal2100005222.Infrastructure.adapters.mysql.entities.user.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -16,4 +17,7 @@ public interface UserRepository extends JpaRepository<User, String> {
     Optional<User> findByEmail(String email);
 
     boolean existsByEmail(String email);
+
+    String findCart_CartUuidByUserUuid(String userUuid);
+
 }

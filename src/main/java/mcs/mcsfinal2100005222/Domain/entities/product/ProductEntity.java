@@ -35,7 +35,9 @@ public class ProductEntity {
 
     private List<ProductEAVEntity> productEAVList;
 
-    private List<String> productMediaURLList;
+    private List<String> productMediaURLs;
+
+    private boolean isProductPublished;
 
 
 }

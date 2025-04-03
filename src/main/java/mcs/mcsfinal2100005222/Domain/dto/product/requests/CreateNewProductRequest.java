@@ -1,4 +1,4 @@
-package mcs.mcsfinal2100005222.Domain.dto.product;
+package mcs.mcsfinal2100005222.Domain.dto.product.requests;
 
 
 import lombok.Data;

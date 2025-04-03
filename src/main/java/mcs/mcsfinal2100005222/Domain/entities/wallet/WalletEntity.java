@@ -1,5 +1,4 @@
-package mcs.mcsfinal2100005222.Domain.entities.product;
-
+package mcs.mcsfinal2100005222.Domain.entities.wallet;
 
 import lombok.*;
 import mcs.mcsfinal2100005222.Domain.entities.user.UserEntity;
@@ -9,10 +8,12 @@ import mcs.mcsfinal2100005222.Domain.entities.user.UserEntity;
 @NoArgsConstructor
 @Getter
 @Setter
-public class ProductViewsEntity {
+public class WalletEntity {
 
-    private ProductEntity product;
+    private String walletUuid;
 
     private UserEntity user;
+
+    private double walletBalance;
 
 }

@@ -23,8 +23,6 @@ import org.springframework.beans.factory.annotation.Value;
 @EnableMethodSecurity
 public class SecurityConfig {
 
-	@Value("${server.servlet.context-path}")
-	private String prefix;
 
 	private final JwtAuthFilter jwtAuthFilter;
 
@@ -64,7 +62,10 @@ public class SecurityConfig {
 									.requestMatchers("/product/addNewProduct").hasRole("SELLER")
 									.requestMatchers("/product/deleteProduct").hasRole("SELLER")
 									.requestMatchers("/product/buyProduct").authenticated()
+									.requestMatchers("/product/getProductByUUID/**").authenticated()
+									.requestMatchers("/product/editProduct").authenticated()
 					)
+					.authorizeHttpRequests(x->x.requestMatchers("/cart/**").authenticated())
 					.addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
 					.build();
 

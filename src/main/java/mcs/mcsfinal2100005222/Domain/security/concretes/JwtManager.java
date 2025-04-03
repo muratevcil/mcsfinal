@@ -59,7 +59,7 @@ public class JwtManager {
                 .setClaims(claims)
                 .setSubject(userName)
                 .setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * minuteToExpire)) // Correct expiration time calculation
+                .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 30)) // Correct expiration time calculation
                 .signWith(getSignKey(), SignatureAlgorithm.HS256)
                 .compact();
     }

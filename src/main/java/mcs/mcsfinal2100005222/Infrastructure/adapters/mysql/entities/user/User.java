@@ -23,6 +23,7 @@ import lombok.Builder;
 @Entity
 @Getter
 @Setter
+@ToString
 @Table(name="users")
 public class User implements UserDetails {
 
@@ -79,8 +80,7 @@ public class User implements UserDetails {
     @JoinColumn(name="user_wallet_uuid")
     private Wallet wallet;
 
-    @Version
-    private int version;
+
     public User(String uuid,String name, String username, String password, boolean accountNonExpired, boolean isEnabled, boolean accountNonLocked, boolean credentialNonExpired, Set<Role> authorities, String phoneNumber, String email) {
         this.name = name;
         this.username = username;
@@ -99,154 +99,4 @@ public class User implements UserDetails {
 
     }
 
-    public String getUserUuid() {
-        return userUuid;
-    }
-
-    public void setUserUuid(String userUuid) {
-        this.userUuid = userUuid;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public boolean isAccountNonExpired() {
-        return accountNonExpired;
-    }
-
-    public void setAccountNonExpired(boolean accountNonExpired) {
-        this.accountNonExpired = accountNonExpired;
-    }
-
-    public boolean isEnabled() {
-        return isEnabled;
-    }
-
-    public void setEnabled(boolean enabled) {
-        isEnabled = enabled;
-    }
-
-    public boolean isAccountNonLocked() {
-        return accountNonLocked;
-    }
-
-    public void setAccountNonLocked(boolean accountNonLocked) {
-        this.accountNonLocked = accountNonLocked;
-    }
-
-    public boolean isCredentialNonExpired() {
-        return credentialNonExpired;
-    }
-
-    public void setCredentialNonExpired(boolean credentialNonExpired) {
-        this.credentialNonExpired = credentialNonExpired;
-    }
-
-    public Set<Role> getAuthorities() {
-        return authorities;
-    }
-
-    public void setAuthorities(Set<Role> authorities) {
-        this.authorities = authorities;
-    }
-
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public UserType getUserType() {
-        return userType;
-    }
-
-    public void setUserType(UserType userType) {
-        this.userType = userType;
-    }
-
-    @Nullable
-    public List<ProductViews> getProductViews() {
-        return productViews;
-    }
-
-    public void setProductViews(@Nullable List<ProductViews> productViews) {
-        this.productViews = productViews;
-    }
-
-    public Cart getCart() {
-        return cart;
-    }
-
-    public void setCart(Cart cart) {
-        this.cart = cart;
-    }
-
-    public Wallet getWallet() {
-        return wallet;
-    }
-
-    public void setWallet(Wallet wallet) {
-        this.wallet = wallet;
-    }
-
-    public int getVersion() {
-        return version;
-    }
-
-    public void setVersion(int version) {
-        this.version = version;
-    }
-
-    @Override
-    public String toString() {
-        return "User{" +
-                "userUuid='" + userUuid + '\'' +
-                ", name='" + name + '\'' +
-                ", username='" + username + '\'' +
-                ", password='" + password + '\'' +
-                ", accountNonExpired=" + accountNonExpired +
-                ", isEnabled=" + isEnabled +
-                ", accountNonLocked=" + accountNonLocked +
-                ", credentialNonExpired=" + credentialNonExpired +
-                ", authorities=" + authorities +
-                ", phoneNumber='" + phoneNumber + '\'' +
-                ", email='" + email + '\'' +
-                ", userType=" + userType +
-                ", productViews=" + productViews +
-                ", cart=" + cart +
-                ", wallet=" + wallet +
-                ", version=" + version +
-                '}';
-    }
 }

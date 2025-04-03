@@ -2,12 +2,18 @@ package mcs.mcsfinal2100005222.Infrastructure.adapters.mysql.entities.transactio
 
 
 import jakarta.persistence.*;
+import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import mcs.mcsfinal2100005222.Infrastructure.adapters.mysql.entities.product.Product;
 import mcs.mcsfinal2100005222.Infrastructure.adapters.mysql.entities.wallet.Wallet;
 
 import java.util.List;
 
 @Entity
+@Getter
+@Setter
+@Data
 @Table(name="transactions")
 public class Transaction {
 

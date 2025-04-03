@@ -1,14 +1,20 @@
 package mcs.mcsfinal2100005222.Infrastructure.adapters.mysql.entities.product;
 
 
-import jakarta.annotation.Nullable;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import mcs.mcsfinal2100005222.Infrastructure.adapters.mysql.entities.cart.CartCategoryDiscount;
 
 
 import java.util.List;
 
 @Entity
+@Getter
+@Setter
+@Data
 @Table(name="product_category")
 public class ProductCategory {
 
@@ -22,52 +28,13 @@ public class ProductCategory {
             joinColumns = @JoinColumn(name = "category_id"),
             inverseJoinColumns = @JoinColumn(name = "product_id")
     )
+    @JsonIgnore
     private List<Product> product;
     @Column(name="category_name")
     private String categoryName;
     @Column(name="category_description")
     private String categoryDescription;
-
     @OneToMany(mappedBy = "cartDiscountCategories")
     private List<CartCategoryDiscount> cartCategoryDiscounts;
 
-    public int getCategoryId() {
-        return categoryId;
-    }
-
-    public void setCategoryId(int categoryId) {
-        this.categoryId = categoryId;
-    }
-
-    public List<Product> getProduct() {
-        return product;
-    }
-
-    public void setProduct(List<Product> product) {
-        this.product = product;
-    }
-
-    public String getCategoryName() {
-        return categoryName;
-    }
-
-    public void setCategoryName(String categoryName) {
-        this.categoryName = categoryName;
-    }
-
-    public String getCategoryDescription() {
-        return categoryDescription;
-    }
-
-    public void setCategoryDescription(String categoryDescription) {
-        this.categoryDescription = categoryDescription;
-    }
-
-    public List<CartCategoryDiscount> getCartCategoryDiscounts() {
-        return cartCategoryDiscounts;
-    }
-
-    public void setCartCategoryDiscounts(List<CartCategoryDiscount> cartCategoryDiscounts) {
-        this.cartCategoryDiscounts = cartCategoryDiscounts;
-    }
 }

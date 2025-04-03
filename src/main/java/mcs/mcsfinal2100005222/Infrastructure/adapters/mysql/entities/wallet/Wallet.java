@@ -4,6 +4,10 @@ package mcs.mcsfinal2100005222.Infrastructure.adapters.mysql.entities.wallet;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 import mcs.mcsfinal2100005222.Infrastructure.adapters.mysql.entities.transactions.Transaction;
 import mcs.mcsfinal2100005222.Infrastructure.adapters.mysql.entities.user.User;
 
@@ -11,6 +15,10 @@ import java.util.List;
 import java.util.UUID;
 
 @Entity
+@Data
+@Getter
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name="wallet")
 public class Wallet {
 
@@ -27,57 +35,8 @@ public class Wallet {
 
     @OneToMany(mappedBy = "wallet")
     private List<Transaction> walletTransactions;
-
-
-    @Version
-    private int version;
-
-
-    public int getVersion() {
-        return version;
-    }
-
-    public void setVersion(int version) {
-        this.version = version;
-    }
-
     public Wallet(User user){
         this.user = user;
     }
 
-    public Wallet() {
-
-    }
-
-    public String getWalletUuid() {
-        return walletUuid;
-    }
-
-    public void setWalletUuid(String walletUuid) {
-        this.walletUuid = walletUuid;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    public double getWalletBalance() {
-        return walletBalance;
-    }
-
-    public void setWalletBalance(double walletBalance) {
-        this.walletBalance = walletBalance;
-    }
-
-    public List<Transaction> getWalletTransactions() {
-        return walletTransactions;
-    }
-
-    public void setWalletTransactions(List<Transaction> walletTransactions) {
-        this.walletTransactions = walletTransactions;
-    }
 }
