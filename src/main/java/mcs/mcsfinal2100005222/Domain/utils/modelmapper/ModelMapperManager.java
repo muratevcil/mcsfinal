@@ -1,13 +1,10 @@
 package mcs.mcsfinal2100005222.Domain.utils.modelmapper;
 
 
-import mcs.mcsfinal2100005222.Domain.entities.product.ProductEAVEntity;
 import mcs.mcsfinal2100005222.Domain.entities.product.ProductEntity;
-import mcs.mcsfinal2100005222.Infrastructure.adapters.mysql.entities.product.Product;
-import mcs.mcsfinal2100005222.Infrastructure.adapters.mysql.entities.product.ProductEAV;
+import mcs.mcsfinal2100005222.Infrastructure.mysql.entities.product.Product;
 import org.modelmapper.Conditions;
 import org.modelmapper.ModelMapper;
-import org.modelmapper.TypeMap;
 import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

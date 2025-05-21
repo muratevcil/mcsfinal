@@ -3,6 +3,8 @@ package mcs.mcsfinal2100005222.Domain.dto.cart.requests;
 import jakarta.annotation.Nullable;
 import lombok.*;
 
+import java.util.List;
+
 @Data
 @Getter
 @Setter
@@ -10,11 +12,13 @@ import lombok.*;
 @NoArgsConstructor
 public class AddItemToCartRequest {
 
-    private String jwt;
-
     @Nullable
     private String productUuid;
 
-    private double productQuantity;
+    @NonNull
+    private Double productQuantity;
+
+    @Nullable
+    private List<String> affectedProductDiscountUuidList;
 
 }

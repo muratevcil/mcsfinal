@@ -32,4 +32,6 @@ public class CreateNewProductRequest {
 
     private List<String> productMediaURLs;
 
+    private Double productPrice;
+
 }

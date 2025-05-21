@@ -1,13 +1,12 @@
 package mcs.mcsfinal2100005222.Domain.entities.user;
 
 
-import jakarta.persistence.Column;
 import lombok.*;
 import mcs.mcsfinal2100005222.Domain.entities.cart.CartEntity;
 import mcs.mcsfinal2100005222.Domain.entities.product.ProductViewsEntity;
 import mcs.mcsfinal2100005222.Domain.entities.wallet.WalletEntity;
-import mcs.mcsfinal2100005222.Infrastructure.adapters.mysql.entities.user.Abstracts.Role;
-import mcs.mcsfinal2100005222.Infrastructure.adapters.mysql.entities.user.Abstracts.UserType;
+import mcs.mcsfinal2100005222.Infrastructure.mysql.entities.user.Abstracts.Role;
+import mcs.mcsfinal2100005222.Infrastructure.mysql.entities.user.Abstracts.UserType;
 
 import java.util.Set;
 

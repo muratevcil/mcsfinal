@@ -14,6 +14,14 @@ public class CartItemEntity {
 
     private String productUuid;
 
+    private String productName;
+
+    private String productDescription;
+
+    private String productImgUrl;
+
+    private double productPrice;
+
     private double productQuantity;
 
 

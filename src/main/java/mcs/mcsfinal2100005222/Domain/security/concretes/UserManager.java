@@ -1,44 +1,45 @@
 package mcs.mcsfinal2100005222.Domain.security.concretes;
 
 
+import io.jsonwebtoken.JwtException;
 import jakarta.persistence.EntityManager;
 import jakarta.transaction.Transactional;
-import mcs.mcsfinal2100005222.Domain.requests.CreateUserRequest;
-import mcs.mcsfinal2100005222.Infrastructure.adapters.mysql.entities.cart.Cart;
-import mcs.mcsfinal2100005222.Infrastructure.adapters.mysql.entities.user.TestLombok;
-import mcs.mcsfinal2100005222.Infrastructure.adapters.mysql.entities.user.User;
-import mcs.mcsfinal2100005222.Infrastructure.adapters.mysql.entities.wallet.Wallet;
-import mcs.mcsfinal2100005222.Infrastructure.adapters.mysql.repositories.CartRepository;
-import mcs.mcsfinal2100005222.Infrastructure.adapters.mysql.repositories.UserRepository;
-import mcs.mcsfinal2100005222.Infrastructure.adapters.mysql.repositories.WalletRepository;
+import mcs.mcsfinal2100005222.Domain.dto.requests.CreateUserRequest;
+import mcs.mcsfinal2100005222.Infrastructure.mysql.entities.cart.Cart;
+import mcs.mcsfinal2100005222.Infrastructure.mysql.entities.user.User;
+import mcs.mcsfinal2100005222.Infrastructure.mysql.entities.wallet.Wallet;
+import mcs.mcsfinal2100005222.Infrastructure.mysql.repositories.CartRepository;
+import mcs.mcsfinal2100005222.Infrastructure.mysql.repositories.UserRepository;
+import mcs.mcsfinal2100005222.Infrastructure.mysql.repositories.WalletRepository;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
+import java.security.SignatureException;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.Optional;
 import java.util.UUID;
-
 
 @Service
 public class UserManager implements UserDetailsService {
 
     private final UserRepository userRepository;
-
     private final CartRepository cartRepository;
     private final WalletRepository walletRepository;
-
+    private final JwtManager jwtService;
     private final EntityManager entityManager;
-
-
     private final BCryptPasswordEncoder passwordEncoder;
 
-    public UserManager(UserRepository userRepository, CartRepository cartRepository, WalletRepository walletRepository, EntityManager entityManager, BCryptPasswordEncoder passwordEncoder) {
+    public UserManager(UserRepository userRepository, CartRepository cartRepository, WalletRepository walletRepository, EntityManager entityManager, BCryptPasswordEncoder passwordEncoder, JwtManager jwtManager) {
         this.userRepository = userRepository;
         this.cartRepository = cartRepository;
         this.walletRepository = walletRepository;
         this.entityManager = entityManager;
         this.passwordEncoder = passwordEncoder;
+        this.jwtService = jwtManager;
     }
 
     public Optional<User> getByUserName(String username){
@@ -62,7 +63,8 @@ public class UserManager implements UserDetailsService {
                 true,  // credentialNonExpired
                 createUserRequest.getAuthorities(),
                 createUserRequest.getPhoneNumber(),
-                createUserRequest.getEmail()
+                createUserRequest.getEmail(),
+                new ArrayList<>()
         );
         //cartRepository.save(new Cart(newUser));
         //walletRepository.save(new Wallet(newUser));
@@ -77,6 +79,15 @@ public class UserManager implements UserDetailsService {
         walletRepository.save(wallet);
         return userRepository.save(newUser);
 
+    }
+
+    public boolean checkIfJwtIsValid(String jwt) throws SignatureException {
+        try {
+            Date expirationDate = jwtService.extractExpiration(jwt);
+            return !expirationDate.before(new Date());
+        } catch (JwtException e) {
+            return false;
+        }
     }
 
     @Override

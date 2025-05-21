@@ -6,12 +6,12 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.List;
+
 @Data
 @Getter
 @Setter
 public class EditProductRequest {
-
-    private String jwt;
 
     private String productUuid;
 
@@ -21,6 +21,16 @@ public class EditProductRequest {
     @Nullable
     private String productDescription;
 
+    @Nullable
+    private Double productPrice;
+
+    @Nullable
+    private Double productStockQuantity;
+
+    @Nullable
+    private List<String> productMediaURLs;
+
+    @Nullable
     private Boolean isProductPublished;
 
 }

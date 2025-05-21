@@ -1,13 +1,11 @@
 package mcs.mcsfinal2100005222.Application.endpoints;
 
-import jakarta.websocket.server.PathParam;
 import lombok.AllArgsConstructor;
 import mcs.mcsfinal2100005222.Domain.entities.GenericResponse;
 import mcs.mcsfinal2100005222.Domain.entities.product.ProductEntity;
 import mcs.mcsfinal2100005222.Domain.ports.ProductServicePort;
-import mcs.mcsfinal2100005222.Infrastructure.adapters.mysql.repositories.ProductRepository;
+import mcs.mcsfinal2100005222.Infrastructure.mysql.repositories.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

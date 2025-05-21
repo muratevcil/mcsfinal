@@ -53,6 +53,9 @@ public class SecurityConfig {
 					.authorizeHttpRequests(x ->
 							x.requestMatchers("/auth/user").authenticated()
 									.requestMatchers("/auth/admin").hasRole("ADMIN")
+									.requestMatchers("/auth/checkIfJwtValid").permitAll()
+									.requestMatchers("/auth/getUserRole").permitAll()
+									.requestMatchers("/auth/getUserDetails").authenticated()
 					)
 					.authorizeHttpRequests(x->
 							x.requestMatchers("/test/**").hasRole("ADMIN")
@@ -64,7 +67,22 @@ public class SecurityConfig {
 									.requestMatchers("/product/buyProduct").authenticated()
 									.requestMatchers("/product/getProductByUUID/**").authenticated()
 									.requestMatchers("/product/editProduct").authenticated()
+									.requestMatchers("/product/getMainPageProducts").permitAll()
+									.requestMatchers("/product/getSellerProducts").authenticated()
 					)
+					.authorizeHttpRequests(x->
+							x.requestMatchers("/cart/getCartContent").permitAll()
+									.requestMatchers("/cart/incrementOrDecrementItemCount").authenticated()
+									.requestMatchers("/cart/getCartItemCount").authenticated()
+					)
+					.authorizeHttpRequests(x->
+							x.requestMatchers("/favorites/addToFavorites").authenticated()
+									.requestMatchers("/favorites/getFavoritesCount").authenticated()
+									.requestMatchers("/favorites/getFavoritedProducts").authenticated()
+									.requestMatchers("/favorites/removeFavoritedProduct/**").authenticated())
+					.authorizeHttpRequests(x->
+							x.requestMatchers("/system/ping").permitAll())
+					.authorizeHttpRequests(x->x.requestMatchers("/category/getAll").permitAll())
 					.authorizeHttpRequests(x->x.requestMatchers("/cart/**").authenticated())
 					.addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
 					.build();

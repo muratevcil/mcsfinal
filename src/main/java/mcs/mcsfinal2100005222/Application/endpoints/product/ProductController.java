@@ -3,11 +3,15 @@ package mcs.mcsfinal2100005222.Application.endpoints.product;
 
 import mcs.mcsfinal2100005222.Domain.dto.product.requests.CreateNewProductRequest;
 import mcs.mcsfinal2100005222.Domain.dto.product.requests.EditProductRequest;
+import mcs.mcsfinal2100005222.Domain.dto.product.responses.MainPageProductResponse;
 import mcs.mcsfinal2100005222.Domain.entities.GenericResponse;
 import mcs.mcsfinal2100005222.Domain.entities.product.ProductEntity;
 import mcs.mcsfinal2100005222.Domain.ports.ProductServicePort;
-import mcs.mcsfinal2100005222.Infrastructure.adapters.mysql.entities.product.Product;
+import mcs.mcsfinal2100005222.Infrastructure.mysql.entities.product.Product;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -21,8 +25,12 @@ public class ProductController {
 
     @GetMapping( "/getAllProducts")
     public GenericResponse<List<ProductEntity>> getProductsByCategoryId(){
-        System.out.println("çalış");
         return productManager.getAllProducts();
+    }
+
+    @GetMapping("/getMainPageProducts")
+    public GenericResponse<Page<MainPageProductResponse>> getMainPageProducts(@PageableDefault(size = 10) Pageable pageable){
+        return productManager.getMainPageProducts(pageable);
     }
 
     @PostMapping("/addNewProduct")
@@ -35,9 +43,15 @@ public class ProductController {
         return productManager.getProductByUUID(uuid);
     }
 
-    @PatchMapping("/editProduct")
+    @PostMapping("/editProduct")
     public GenericResponse<Product> editProduct(@RequestBody EditProductRequest editProductRequest){
+        System.out.println("product update tetiklendi");
         return productManager.editProduct(editProductRequest);
+    }
+
+    @GetMapping("/getSellerProducts")
+    public GenericResponse<List<Product>> getSellerProducts(@RequestHeader("Authorization") String jwt){
+        return productManager.getSellerProducts(jwt.substring(7));
     }
 
 
